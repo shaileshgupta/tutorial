@@ -6,8 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import pymongo
-
-from tutorial import settings
+from scrapy.conf import settings
 from scrapy.exceptions import DropItem
 
 class TutorialPipeline(object):
@@ -21,14 +20,12 @@ class TutorialPipeline(object):
 
 		self.collection = db[settings['MONGODB_COLLECTION']]
 
-    def process_item(self, item, spider):
-        valid = True
-        for data in item:
-        	if not data:
-        		valid = False
-        		raise DropItem("Missing {0}!".format(data))
+	def process_item(self, item, spider):
+		for data in item:
+			if not data:
+				valid = False
+				raise DropItem("Missing {0}!".format(data))
 
-        if valid:
-        	self.collection.insert(dict(item))
+		self.collection.insert(dict(item))
 
-        return item
+		return item

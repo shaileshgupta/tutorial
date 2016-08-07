@@ -14,7 +14,9 @@ BOT_NAME = 'tutorial'
 SPIDER_MODULES = ['tutorial.spiders']
 NEWSPIDER_MODULE = 'tutorial.spiders'
 
-ITEM_PIPELINES = ['tutorial.pipelines.TutorialPipeline',]
+ITEM_PIPELINES = {
+	'tutorial.pipelines.TutorialPipeline':300
+}
 
 MONGODB_SERVER = 'localhost'
 MONGODB_PORT = 27017
