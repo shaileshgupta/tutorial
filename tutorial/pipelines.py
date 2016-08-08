@@ -20,6 +20,8 @@ class TutorialPipeline(object):
 
 		self.collection = db[settings['MONGODB_COLLECTION']]
 
+		self.collection.drop()
+
 	def process_item(self, item, spider):
 		for data in item:
 			if not data:
